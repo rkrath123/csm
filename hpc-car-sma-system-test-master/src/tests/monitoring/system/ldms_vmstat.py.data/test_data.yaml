@@ -1,0 +1,4 @@
+!mux
+variant_test-1:
+    kafka_consume_secs: 120
+    postgres_interval: '10 minutes'

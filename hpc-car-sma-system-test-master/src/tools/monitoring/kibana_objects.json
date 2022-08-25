@@ -1,0 +1,355 @@
+[
+  {
+    "_id": "AWz35RiuezXOvRZrQZc1",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Compute node logs",
+      "hits": 0,
+      "description": "Logs from all compute nodes",
+      "panelsJSON": "[{\"col\":7,\"id\":\"AWy1biHyHrFVydGWBo1M\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":8,\"type\":\"visualization\"},{\"size_x\":6,\"size_y\":9,\"panelIndex\":3,\"type\":\"search\",\"id\":\"AWz3uajWezXOvRZrKZ0O\",\"col\":1,\"row\":1,\"columns\":[\"hostname\",\"priority\",\"message\"],\"sort\":[\"timereported\",\"desc\"]}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-4h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"match_all\":{}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWzimLu9ezXOvRZrl-zj",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Docker container logs all namespaces",
+      "hits": 0,
+      "description": "Docker container logs in all namespaces",
+      "panelsJSON": "[{\"col\":7,\"id\":\"AWy1andoHrFVydGWBjT-\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":9,\"type\":\"visualization\"},{\"col\":1,\"columns\":[\"hostname\",\"message\"],\"id\":\"AWzeeGMM_4IH8x8cF4M_\",\"panelIndex\":3,\"row\":1,\"size_x\":6,\"size_y\":9,\"sort\":[\"timereported\",\"desc\"],\"type\":\"search\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-1h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"shasta-logs*\",\"key\":\"tag\",\"negate\":false,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}},{\"query\":{\"match_all\":{}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWz4bP8MezXOvRZrjRNt",
+    "_type": "dashboard",
+    "_source": {
+      "title": "ClusterStor logs",
+      "hits": 0,
+      "description": "Logs from ClusterStor filesystems",
+      "panelsJSON": "[{\"col\":1,\"columns\":[\"severity\",\"hostname\",\"message\"],\"id\":\"AWz30mTmezXOvRZrN0La\",\"panelIndex\":1,\"row\":1,\"size_x\":6,\"size_y\":9,\"sort\":[\"timereported\",\"desc\"],\"type\":\"search\"},{\"col\":7,\"id\":\"AWz32davezXOvRZrO18q\",\"panelIndex\":2,\"row\":1,\"size_x\":6,\"size_y\":3,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-24h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"match_all\":{}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWz37lDdezXOvRZrRqz0",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Non-compute node logs",
+      "hits": 0,
+      "description": "Logs from all non-compute nodes",
+      "panelsJSON": "[{\"size_x\":6,\"size_y\":3,\"panelIndex\":1,\"type\":\"search\",\"id\":\"AWz3t94vezXOvRZrKJ3q\",\"col\":1,\"row\":1,\"columns\":[\"pri\",\"hostname\",\"log\"],\"sort\":[\"timereported\",\"desc\"]},{\"size_x\":6,\"size_y\":3,\"panelIndex\":2,\"type\":\"visualization\",\"id\":\"AWzTQZskHrFVydGW8cQM\",\"col\":7,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-4h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"match_all\":{}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AW0CuWIke3Yp0BBvljej",
+    "_type": "dashboard",
+    "_source": {
+      "title": "ClusterStor critical Lustre errors",
+      "hits": 0,
+      "description": "Critical Lustre errors from ClusterStor",
+      "panelsJSON": "[{\"size_x\":6,\"size_y\":3,\"panelIndex\":1,\"type\":\"search\",\"id\":\"AWz30mTmezXOvRZrN0La\",\"col\":1,\"row\":1,\"columns\":[\"severity\",\"hostname\",\"message\"],\"sort\":[\"timereported\",\"desc\"]},{\"size_x\":6,\"size_y\":3,\"panelIndex\":2,\"type\":\"visualization\",\"id\":\"AWz32davezXOvRZrO18q\",\"col\":7,\"row\":1}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-2\":{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-24h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"query\":{\"query_string\":{\"query\":\"message:LustreError AND severity:crit\",\"analyze_wildcard\":true}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWzjn_QkezXOvRZryerb",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Docker container logs strimzi-kafka",
+      "hits": 0,
+      "description": "Docker container logs for strimzi-kafka cluster services",
+      "panelsJSON": "[{\"col\":1,\"columns\":[\"hostname\",\"message\"],\"id\":\"AWzeeGMM_4IH8x8cF4M_\",\"panelIndex\":3,\"row\":1,\"size_x\":6,\"size_y\":14,\"sort\":[\"timereported\",\"desc\"],\"type\":\"search\"},{\"col\":7,\"id\":\"AWy0hQKFHrFVydGW1dbJ\",\"panelIndex\":4,\"row\":1,\"size_x\":6,\"size_y\":4,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-4\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-1h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"shasta-logs*\",\"key\":\"tag\",\"negate\":false,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}},{\"query\":{\"query_string\":{\"query\":\"hostname.keyword:cluster-kafka* OR hostname.keyword:cluster-zookeeper* OR hostname.keyword:strimzi-cluster-operator*\",\"analyze_wildcard\":true}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWzedzvm_4IH8x8cF27R",
+    "_type": "dashboard",
+    "_source": {
+      "title": "Docker container logs sma namespace",
+      "hits": 0,
+      "description": "Container logs only in the sma namespace",
+      "panelsJSON": "[{\"col\":1,\"columns\":[\"hostname\",\"message\"],\"id\":\"AWzeeGMM_4IH8x8cF4M_\",\"panelIndex\":3,\"row\":1,\"size_x\":7,\"size_y\":8,\"sort\":[\"timereported\",\"desc\"],\"type\":\"search\"},{\"col\":8,\"id\":\"AWy0hQKFHrFVydGW1dbJ\",\"panelIndex\":4,\"row\":1,\"size_x\":5,\"size_y\":4,\"type\":\"visualization\"}]",
+      "optionsJSON": "{\"darkTheme\":false}",
+      "uiStateJSON": "{\"P-4\":{\"vis\":{\"legendOpen\":false}}}",
+      "version": 1,
+      "timeRestore": true,
+      "timeTo": "now",
+      "timeFrom": "now-4h",
+      "refreshInterval": {
+        "display": "Off",
+        "pause": false,
+        "value": 0
+      },
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"shasta-logs*\",\"key\":\"tag\",\"negate\":false,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}},{\"query\":{\"query_string\":{\"query\":\"hostname.keyword:*_sma_*\",\"analyze_wildcard\":true}}}],\"highlightAll\":true,\"version\":true}"
+      }
+    }
+  },
+  {
+    "_id": "AWz3t94vezXOvRZrKJ3q",
+    "_type": "search",
+    "_source": {
+      "title": "NCN node logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "hostname",
+        "priority",
+        "message"
+      ],
+      "sort": [
+        "timereported",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"highlightAll\":true,\"version\":true,\"query\":{\"query_string\":{\"query\":\"hostname.keyword:sms*nmn\",\"analyze_wildcard\":true}},\"filter\":[{\"meta\":{\"index\":\"shasta-logs*\",\"negate\":true,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWz30mTmezXOvRZrN0La",
+    "_type": "search",
+    "_source": {
+      "title": "ClusterStor logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "severity",
+        "hostname",
+        "message"
+      ],
+      "sort": [
+        "timereported",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"clusterstor-logs*\",\"highlightAll\":true,\"version\":true,\"query\":{\"query_string\":{\"query\":\"NOT message:\\\"Skipped * previous similar messages\\\"\",\"analyze_wildcard\":true}},\"filter\":[]}"
+      }
+    }
+  },
+  {
+    "_id": "AWzeeGMM_4IH8x8cF4M_",
+    "_type": "search",
+    "_source": {
+      "title": "Docker container logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "hostname",
+        "message"
+      ],
+      "sort": [
+        "timereported",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"highlightAll\":true,\"version\":true,\"query\":{\"match_all\":{}},\"filter\":[{\"meta\":{\"index\":\"shasta-logs*\",\"negate\":false,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWz3uajWezXOvRZrKZ0O",
+    "_type": "search",
+    "_source": {
+      "title": "Compute node logs",
+      "description": "",
+      "hits": 0,
+      "columns": [
+        "hostname",
+        "priority",
+        "message"
+      ],
+      "sort": [
+        "timereported",
+        "desc"
+      ],
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"highlightAll\":true,\"version\":true,\"query\":{\"query_string\":{\"query\":\"hostname.keyword:nid*\",\"analyze_wildcard\":true}},\"filter\":[{\"meta\":{\"index\":\"shasta-logs*\",\"negate\":true,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWy1andoHrFVydGWBjT-",
+    "_type": "visualization",
+    "_source": {
+      "title": "Docker container log message counts (data table)",
+      "visState": "{\"title\":\"Docker container log message counts (data table)\",\"type\":\"table\",\"params\":{\"perPage\":25,\"showMeticsAtAllLevels\":false,\"showPartialRows\":false,\"showTotal\":true,\"sort\":{\"columnIndex\":null,\"direction\":null},\"totalFunc\":\"sum\",\"type\":\"table\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"hostname.keyword\",\"size\":500,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Hostname\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"match_all\":{}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"AWyryiBxHrFVydGW-2AR\",\"key\":\"tag\",\"negate\":false,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWy0hQKFHrFVydGW1dbJ",
+    "_type": "visualization",
+    "_source": {
+      "title": "Docker container log message counts (pie chart)",
+      "visState": "{\"title\":\"Docker container log message counts (pie chart)\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"top\",\"isDonut\":false,\"type\":\"pie\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"hostname.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Top Log Counts - Containers\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"match_all\":{}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"AWyryiBxHrFVydGW-2AR\",\"key\":\"tag\",\"negate\":false,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWzTQZskHrFVydGW8cQM",
+    "_type": "visualization",
+    "_source": {
+      "title": "Non-compute log message counts (data table)",
+      "visState": "{\"title\":\"Non-compute log message counts (data table)\",\"type\":\"table\",\"params\":{\"perPage\":100,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":true,\"totalFunc\":\"sum\",\"type\":\"table\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"hostname.keyword\",\"size\":250,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Nid\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"query_string\":{\"query\":\"hostname:sms*\",\"analyze_wildcard\":true}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"AWyryiBxHrFVydGW-2AR\",\"key\":\"tag\",\"negate\":true,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWy1biHyHrFVydGWBo1M",
+    "_type": "visualization",
+    "_source": {
+      "title": "Compute node log message counts (data table)",
+      "visState": "{\"title\":\"Compute node log message counts (data table)\",\"type\":\"table\",\"params\":{\"perPage\":100,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":true,\"totalFunc\":\"sum\",\"type\":\"table\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"hostname.keyword\",\"size\":250,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Nid\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"query_string\":{\"query\":\"hostname:nid*\",\"analyze_wildcard\":true}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"AWyryiBxHrFVydGW-2AR\",\"key\":\"tag\",\"negate\":true,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWzTI83aHrFVydGW6DEk",
+    "_type": "visualization",
+    "_source": {
+      "title": "Switch node log message counts (data table)",
+      "visState": "{\"title\":\"Switch node log message counts (data table)\",\"type\":\"table\",\"params\":{\"perPage\":100,\"showPartialRows\":false,\"showMeticsAtAllLevels\":false,\"sort\":{\"columnIndex\":null,\"direction\":null},\"showTotal\":true,\"totalFunc\":\"sum\",\"type\":\"table\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"hostname.keyword\",\"size\":250,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Nid\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"query_string\":{\"query\":\"hostname:x*\",\"analyze_wildcard\":true}},\"filter\":[{\"$state\":{\"store\":\"appState\"},\"meta\":{\"alias\":null,\"disabled\":false,\"index\":\"AWyryiBxHrFVydGW-2AR\",\"key\":\"tag\",\"negate\":true,\"type\":\"phrase\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}}}]}"
+      }
+    }
+  },
+  {
+    "_id": "AWz32davezXOvRZrO18q",
+    "_type": "visualization",
+    "_source": {
+      "title": "ClusterStor log message counts (data table)",
+      "visState": "{\"title\":\"ClusterStor log message counts (data table)\",\"type\":\"table\",\"params\":{\"perPage\":10,\"showMeticsAtAllLevels\":false,\"showPartialRows\":false,\"showTotal\":true,\"sort\":{\"columnIndex\":null,\"direction\":null},\"totalFunc\":\"sum\",\"type\":\"table\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"bucket\",\"params\":{\"field\":\"hostname.keyword\",\"size\":100,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Hostname\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{\"vis\":{\"params\":{\"sort\":{\"columnIndex\":null,\"direction\":null}}}}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\":[],\"index\":\"clusterstor-logs*\",\"highlightAll\":true,\"version\":true,\"query\":{\"match_all\":{}}}"
+      }
+    }
+  },
+  {
+    "_id": "AWy0iJ9WHrFVydGW1fVC",
+    "_type": "visualization",
+    "_source": {
+      "title": "Compute node log message counts (pie chart)",
+      "visState": "{\"title\":\"Compute node log message counts (pie chart)\",\"type\":\"pie\",\"params\":{\"addTooltip\":true,\"addLegend\":true,\"legendPosition\":\"right\",\"isDonut\":false,\"type\":\"pie\"},\"aggs\":[{\"id\":\"1\",\"enabled\":true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\":true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"hostname.keyword\",\"size\":20,\"order\":\"desc\",\"orderBy\":\"1\",\"customLabel\":\"Top Log Messages - Computes\"}}],\"listeners\":{}}",
+      "uiStateJSON": "{}",
+      "description": "",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"index\":\"shasta-logs*\",\"query\":{\"query_string\":{\"query\":\"hostname:nid*\",\"analyze_wildcard\":true}},\"filter\":[{\"meta\":{\"index\":\"AWyryiBxHrFVydGW-2AR\",\"negate\":true,\"disabled\":false,\"alias\":null,\"type\":\"phrase\",\"key\":\"tag\",\"value\":\"docker_container\"},\"query\":{\"match\":{\"tag\":{\"query\":\"docker_container\",\"type\":\"phrase\"}}},\"$state\":{\"store\":\"appState\"}}]}"
+      }
+    }
+  }
+]

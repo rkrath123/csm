@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# define number of partitions and replicas to benchmark
+PARTITIONS=4
+REPLICAS=2
+
+# define number of producers, topics to benchmark
+PRODUCERS=2
+TOPICS=1
+
+# message size in bytes
+SIZE=100
+
+# 1GB of message data per topic (each message is 100 bytes)
+CNT=10000000    # max int is 2,147,483,647
+
+# 20GB of message data per topic (each message is 100 bytes)
+# CNT=$(( $CNT * 20 ))
+
+# default acks is never wait (0)
+# 1: producer gets an ack after leader replica received data
+# all: producer gets an acknowledgement after all replicas received data
+ACKS=0
+
+topic_prefix="user-benchmark"
+
+function run_cmd() {
+	echo $@
+	eval $@
+}
+
+function exists()
+{
+	command -v "$1" >/dev/null 2>&1
+}
+
+function get_producer_job_name() {
+	echo "producer$1"
+}
+
+function get_consumer_job_name() {
+	echo "consumer$1"
+}
+
+function get_topic_name() {
+	echo "$topic_prefix-topic$1"
+}
+
+function kafka_health() {
+	kafka_pods=("cluster-kafka-0" "cluster-kafka-1" "cluster-kafka-2")
+	kafka_persistent_dir="/var/lib/kafka/data"
+
+	for pod in "${kafka_pods[@]}"
+	do
+		echo "Kafka (${pod}) RES Mem"
+		kubectl -n sma exec ${pod} -c kafka -- sh -c 'COLUMNS=1000 top -o RES -U kafka -c -n 1 -b | grep -v top'
+		echo
+	done
+
+	for pod in "${kafka_pods[@]}"
+	do
+		kafka_data=$(kubectl -n sma exec ${pod} -c kafka -- df -k ${kafka_persistent_dir}| grep -v "Use" | awk '{ print $5}' | sed 's/%//g')
+		echo "Kafka (${pod}) data usage= ${kafka_data}%"
+		kubectl -n sma exec ${pod} -c kafka -- df -h ${kafka_persistent_dir}
+		echo
+		kubectl -n sma exec ${pod} -c kafka -- sh -c "du -hs ${kafka_persistent_dir}/kafka-log*/* | grep $topic_prefix; exit 0"
+		echo
+	done
+}
+
+# vim:shiftwidth=4:softtabstop=4:tabstop=4:

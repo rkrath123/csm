@@ -1,0 +1,262 @@
+#!/bin/bash
+
+SMA_TOOLS=true
+SMA_TOOLS_HOME=/root/sma-sos
+PATH=$PATH:${SMA_TOOLS_HOME}
+
+SMA_HOME=/etc/sma-data
+SMA_SERVER=`hostname -f`
+SMA_PREFIX=sma_
+SMA_SUFFIX=_1
+
+SMA_APACHE_CONTAINER=sma_apache_1
+SMA_INFLUX_CONTAINER=sma_influxdb_1
+SMA_KAFKA_CONTAINER=sma_kafka_1
+SMA_MYSQL_CONTAINER=sma_mysql_1
+SMA_PERSISTER_MYSQL_CONTAINER=sma_persister-mysql_1
+SMA_SEASTREAM_CONTAINER=sma_seastream_1
+SMA_INFINIBAND_CONTAINER=sma_infiniband_1
+SMA_GRAFANA_CONTAINER=sma_grafana_1
+SMA_ELASTICSEARCH_CONTAINER=sma_elasticsearch_1
+
+SMA_APACHE_ERROR_LOG=/usr/local/apache2/logs/error_log
+SMA_PERSISTER_MYSQL_LOG=/var/log/persister-mysql.log
+SMA_SEASTREAM_LOGDIR=/var/log/cray-seastream
+SMA_INFINIBAND_LOG=/var/log/infiniband_agent.log
+
+alias d="docker"
+alias sma_status="${SMA_TOOLS_HOME}/sma_status.sh"
+alias sma_storagecheck="${SMA_TOOLS_HOME}/sma_storagecheck.sh"
+alias sma_healthcheck="${SMA_TOOLS_HOME}/sma_healthcheck.sh"
+
+function runit () {
+        echo $@
+        eval $@
+}
+
+show_version () {
+        runit date
+        echo ${SMA_SERVER}
+        runit uptime
+        echo
+        cmd="cat /etc/opt/cray/release/sma-release"
+        runit $cmd
+		echo
+		cmd="docker images"
+		runit $cmd
+        echo
+}
+
+show_build () {
+	sma_version=$(cat /etc/opt/cray/release/sma-release)
+	echo ${sma_version} | sed -e 's/ RPMS=.*//'
+}
+
+function get_container_name {
+	local string=${1#$SMA_PREFIX}
+	string=${string%$SMA_SUFFIX}
+	echo $SMA_PREFIX$string$SMA_SUFFIX
+}
+
+function sma_help() {
+	echo "env - show SMA docker environment variables"
+	echo "version - SMA release version information" 
+	echo "build - SMA build information" 
+	echo "ps - list of SMA services"
+	echo "status - check status of SMA services"
+	echo "stats - get SMA service resource statistics (memory, cpu) usage"
+	echo "sh SERVICE - execute bash shell in the SMA container"
+	echo "logs SERVICE - view logs for the SMA service"
+	echo "stop [SERVICE | all] - stop SMA service(s)"
+	echo "start [SERVICE | all] - start SMA service(s)"
+	echo "restart [SERVICE | all] - restart SMA service(s)"
+	echo "healthcheck - check if SMA looks healthy"
+	echo "alarmcheck - check state of SMA alarms"
+	echo "sosreport - collect report for troubleshooting SMA"
+}
+
+function sma_env() {
+	echo SMA_HOME=$SMA_HOME
+	cat $SMA_HOME/etc/.env
+}
+
+function sma_version() {
+	show_version
+}
+
+function sma_build() {
+	show_build
+}
+
+function sma_sh() {
+	container=$(get_container_name $1)
+#	cmd="docker exec -it $container bash -c \"hostname; bash\""
+# 	cmd="docker exec -it $container env - PS1='\H $ ' bash" 
+  	cmd="docker exec -it $container bash -l" 
+	runit $cmd
+}
+
+function sma_cli() {
+	args=("$@")
+
+	arg0="${args[0]}"
+	container=$(get_container_name $arg0)
+	cmd=""
+	for ((i=1; i<$#; i++)) {
+		argsi="${args[$i]}"
+		cmd="$cmd $argsi"
+	}
+ 	cmd="docker exec $container $cmd"
+	runit $cmd
+}
+
+function sma_top() {
+	container=$(get_container_name $1)
+	echo "Container: $container"
+	echo ------------------------------------
+ 	cmd="docker top $container"
+	runit $cmd
+	echo ------------------------------------
+}
+
+function sma_follow_logs() {
+	container=$(get_container_name $1)
+ 	cmd="docker logs -f $container"
+	runit $cmd
+}
+
+function sma_logs() {
+	container=$(get_container_name $1)
+	tail_lines=1000
+	if [[ $# -gt 1 ]] ; then
+		tail_lines=$2
+	fi
+	echo "Container: $container"
+	echo ------------------------------------
+	DATE=`docker exec -i $container sh -c date`
+	echo $DATE; echo
+ 	cmd="docker logs --timestamps --tail $tail_lines $container"
+	runit $cmd
+
+	if [ "$tail_lines" == "all" ]; then
+		tail_lines=1000000
+	fi
+	if [ "$container" == "${SMA_APACHE_CONTAINER}" ]; then
+		cmd="docker exec -i $container tail -$tail_lines ${SMA_APACHE_ERROR_LOG}"
+		echo; runit $cmd
+	fi
+	if [ "$container" == "${SMA_PERSISTER_MYSQL_CONTAINER}" ]; then
+		cmd="docker exec -i $container tail -$tail_lines ${SMA_PERSISTER_MYSQL_LOG}"
+		echo; runit $cmd
+	fi
+	if [ "$container" == "${SMA_SEASTREAM_CONTAINER}" ]; then
+		cmd="docker exec -i $container sh -c 'tail -$tail_lines ${SMA_SEASTREAM_LOGDIR}/*.log'"
+		echo; runit $cmd
+	fi
+	if [ "$container" == "${SMA_INFINIBAND_CONTAINER}" ]; then
+		cmd="docker exec -i $container tail -$tail_lines ${SMA_INFINIBAND_LOG}"
+		echo; runit $cmd
+	fi
+	echo ------------------------------------
+}
+
+function sma_inspect() {
+	container=$(get_container_name $1)
+	echo "Container: $container"
+	echo ------------------------------------
+ 	cmd="docker inspect $container"
+	runit $cmd
+#	restart=`docker inspect -f "{{ .RestartCount }}" $container`
+	echo ------------------------------------
+}
+
+function sma_ready() {
+	# simply wait for influxdb
+	cmd="docker exec ${SMA_GRAFANA_CONTAINER} curl -L -I influxdb:8086/ping?wait_for_leader=30s"
+	ready=1
+	now="$(date +%T)"
+	printf "[%s] Waiting for SMA to come ready\n" "$now"
+	while [ "$ready" -ne 0 ]
+	do
+		printf "."
+		sleep 5
+		`$cmd >/dev/null 2>&1`
+		ready=$?
+	done
+	now="$(date +%T)"
+	printf "\n[%s] SMA is ready\n" "$now"
+}
+
+function sma_stop() {
+	if [[ $1 == "all" ]] ; then
+		cmd="systemctl stop sma"
+		runit $cmd
+	else
+		container=$(get_container_name $1)
+		cmd="docker stop $container"
+		runit $cmd
+	fi
+}
+
+function sma_start() {
+	if [[ $1 == "all" ]] ; then
+		cmd="systemctl start sma"
+		runit $cmd
+		sma_ready
+	else
+		container=$(get_container_name $1)
+		cmd="docker start $container"
+		runit $cmd
+	fi
+}
+
+function sma_restart() {
+	if [[ $1 == "all" ]] ; then
+		cmd="systemctl restart sma"
+		runit $cmd
+		sma_ready
+	else
+		container=$(get_container_name $1)
+		cmd="docker restart $container"
+		runit $cmd
+	fi
+}
+
+function sma_stats() {
+	cmd="docker stats --no-stream --format \"table {{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\" | sort -k 1"
+	runit $cmd
+}
+
+function sma_ps() {
+	cmd="docker ps -f name=sma_ --format \"table {{.Names}}\t{{.CreatedAt}}\t{{.Status}}\" | sort -k 1"
+	runit $cmd
+}
+
+function sma() {
+	action=$1
+	shift
+	funcname="sma_"${action}
+	eval ${funcname} "$@"
+}
+
+function influx() {
+	docker exec -i ${SMA_INFLUX_CONTAINER} influx "$@"
+}
+
+function mysql() {
+	docker exec -i ${SMA_MYSQL_CONTAINER} mysql "$@"
+}
+
+function curl() {
+	docker exec -i ${SMA_GRAFANA_CONTAINER} curl "$@"
+}
+
+function ibstatus() {
+	docker exec -i ${SMA_INFINIBAND_CONTAINER} ibstatus
+}
+
+function ibnetdiscover() {
+	docker exec -i ${SMA_INFINIBAND_CONTAINER} ibnetdiscover "$@"
+}
+
+# vim:shiftwidth=4:softtabstop=4:tabstop=4:

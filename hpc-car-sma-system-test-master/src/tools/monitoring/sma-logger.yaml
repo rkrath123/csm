@@ -1,0 +1,212 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logger-containers
+  namespace: sma
+  labels:
+    app: logger-containers
+    job: logger-containers
+spec:
+  template:
+    metadata:
+      name: logger-containers
+      labels:
+        app: logger-containers
+        job: logger-containers
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - sms01-nmn
+      containers:
+      - name: logger-containers
+# FIXME
+#       image: sms.local:5000/cray/sma-system-test:latest
+        image: cray_sma/system-test:1.1.0-0.0.1
+        command: [ "/tests/monitoring/utils/logger.py" ]
+        args: [ "-l", "containers" ]
+        volumeMounts:
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /dev/log
+          name: dev-log
+        - name: kubectl-binary
+          mountPath: /usr/bin/kubectl
+          readOnly: true
+        - name: k8s-config
+          mountPath: /root/k8s
+          readOnly: true
+        - name: kubectl-config
+          mountPath: /root/.kube/config
+          readOnly: true
+        - name: tz-config
+          mountPath: /etc/localtime
+      restartPolicy: Always
+      hostname: logger-containers
+      volumes:
+      - name: var-log
+        hostPath:
+          path: /var/log
+          type: Directory
+      - name: dev-log
+        hostPath:
+          path: /dev/log
+      - name: kubectl-binary
+        hostPath:
+          path: /usr/bin/kubectl
+      - name: k8s-config
+        hostPath:
+          path: /root/k8s
+      - name: kubectl-config
+        hostPath:
+          path: /root/.kube/config
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/America/Chicago
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logger-syslog
+  namespace: sma
+  labels:
+    app: logger-syslog
+    job: logger-syslog
+spec:
+  template:
+    metadata:
+      name: logger-syslog
+      labels:
+        app: logger-syslog
+        job: logger-syslog
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - sms01-nmn
+      containers:
+      - name: logger-syslog
+# FIXME
+#       image: sms.local:5000/cray/sma-system-test:latest
+        image: cray_sma/system-test:1.1.0-0.0.1
+        command: [ "/tests/monitoring/utils/logger.py" ]
+        args: [ "-l", "syslog" ]
+        volumeMounts:
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /dev/log
+          name: dev-log
+        - name: kubectl-binary
+          mountPath: /usr/bin/kubectl
+          readOnly: true
+        - name: k8s-config
+          mountPath: /root/k8s
+          readOnly: true
+        - name: kubectl-config
+          mountPath: /root/.kube/config
+          readOnly: true
+        - name: tz-config
+          mountPath: /etc/localtime
+      restartPolicy: Always
+      hostname: logger-syslog
+      volumes:
+      - name: var-log
+        hostPath:
+          path: /var/log
+          type: Directory
+      - name: dev-log
+        hostPath:
+          path: /dev/log
+      - name: kubectl-binary
+        hostPath:
+          path: /usr/bin/kubectl
+      - name: k8s-config
+        hostPath:
+          path: /root/k8s
+      - name: kubectl-config
+        hostPath:
+          path: /root/.kube/config
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/America/Chicago
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: logger-clusterstor
+  namespace: sma
+  labels:
+    app: logger-clusterstor
+    job: logger-clusterstor
+spec:
+  template:
+    metadata:
+      name: logger-clusterstor
+      labels:
+        app: logger-clusterstor
+        job: logger-clusterstor
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - sms01-nmn
+      containers:
+      - name: logger-clusterstor
+#       image: sms.local:5000/cray/sma-system-test:latest
+        image: cray_sma/system-test:1.1.0-0.0.1
+        command: [ "/tests/monitoring/utils/logger.py" ]
+        args: [ "-l", "clusterstor" ]
+        volumeMounts:
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /dev/log
+          name: dev-log
+        - name: kubectl-binary
+          mountPath: /usr/bin/kubectl
+          readOnly: true
+        - name: k8s-config
+          mountPath: /root/k8s
+          readOnly: true
+        - name: kubectl-config
+          mountPath: /root/.kube/config
+          readOnly: true
+        - name: tz-config
+          mountPath: /etc/localtime
+      restartPolicy: Always
+      hostname: logger-clusterstor
+      volumes:
+      - name: var-log
+        hostPath:
+          path: /var/log
+          type: Directory
+      - name: dev-log
+        hostPath:
+          path: /dev/log
+      - name: kubectl-binary
+        hostPath:
+          path: /usr/bin/kubectl
+      - name: k8s-config
+        hostPath:
+          path: /root/k8s
+      - name: kubectl-config
+        hostPath:
+          path: /root/.kube/config
+      - name: tz-config
+        hostPath:
+          path: /usr/share/zoneinfo/America/Chicago
+
