@@ -545,38 +545,7 @@ kubeadm join k8s-cluster.computingforgeeks.com:6443 --token sr4l2l.2kvot0pfalh5o
  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml   
 ```
 
-First, install the operator on your cluster.
 
-
-```
-$ kubectl create -f tigera-operator.yaml
-namespace/tigera-operator created
-customresourcedefinition.apiextensions.k8s.io/bgpconfigurations.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/bgppeers.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/blockaffinities.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/caliconodestatuses.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/clusterinformations.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/felixconfigurations.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/globalnetworkpolicies.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/globalnetworksets.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/hostendpoints.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/ipamblocks.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/ipamconfigs.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/ipamhandles.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/ippools.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/ipreservations.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/kubecontrollersconfigurations.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/networkpolicies.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/networksets.crd.projectcalico.org created
-customresourcedefinition.apiextensions.k8s.io/apiservers.operator.tigera.io created
-customresourcedefinition.apiextensions.k8s.io/imagesets.operator.tigera.io created
-customresourcedefinition.apiextensions.k8s.io/installations.operator.tigera.io created
-customresourcedefinition.apiextensions.k8s.io/tigerastatuses.operator.tigera.io created
-serviceaccount/tigera-operator created
-clusterrole.rbac.authorization.k8s.io/tigera-operator created
-clusterrolebinding.rbac.authorization.k8s.io/tigera-operator created
-deployment.apps/tigera-operator created
-```
 
 If you wish to customize the Calico install, customize the downloaded custom-resources.yaml. For example we are updating CIDR.
 
