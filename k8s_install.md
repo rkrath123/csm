@@ -541,15 +541,8 @@ kubeadm join k8s-cluster.computingforgeeks.com:6443 --token sr4l2l.2kvot0pfalh5o
 ```
 
 ### Step 6: Install network plugin on Master
-
-In this guide we’ll use [Calico](https://projectcalico.org/). You can choose any other [supported network plugins](https://kubernetes.io/docs/concepts/cluster-administration/addons/).
-
-Download operator and custom resource files. See [releases page](https://github.com/projectcalico/calico/releases) for latest version.
-
-
 ```
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/tigera-operator.yaml
-curl -O https://raw.githubusercontent.com/projectcalico/calico/v3.26.1/manifests/custom-resources.yaml 
+ kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml   
 ```
 
 First, install the operator on your cluster.
@@ -691,17 +684,6 @@ k8s-worker02.computingforgeeks.com   Ready    <none>   12s   v1.27.2
 $ kubectl get nodes -o wide
 ```
 
-If the join token is expired, refer to our guide on how to join worker nodes.
-
--   [Join new Kubernetes Worker Node to an existing Cluster](https://computingforgeeks.com/join-new-kubernetes-worker-node-to-existing-cluster/)
-
-### Step 8: Deploy application on cluster
-
-If you only have a single node cluster, check our guide on how to run container pods on master nodes:
-
--   [Scheduling Pods on Kubernetes Control plane (Master) Nodes](https://computingforgeeks.com/how-to-schedule-pods-on-kubernetes-control-plane-node/)
-
-We need to validate that our cluster is working by deploying an application.
 
 ```
 kubectl apply -f https://k8s.io/examples/pods/commands.yaml
