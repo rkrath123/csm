@@ -164,7 +164,7 @@ Install cri-dockerd using ready binary (recommended)
 Install wget and curl command line tools.
 
 ```
-### Debian based systems ###
+
 ```
 sudo apt update
 sudo apt install git wget curl
