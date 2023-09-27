@@ -147,11 +147,69 @@ sudo systemctl restart docker
 sudo systemctl enable docker
 ```
 
-For Docker Engine you need a shim interface. You can install Mirantis cri-dockerd as covered in the guide below.
+For Docker Engine you need a shim interface. You can install Mirantis cri-dockerd as covered in the below.
 
--   [Install Mirantis cri-dockerd as Docker Engine shim for Kubernetes](https://computingforgeeks.com/install-mirantis-cri-dockerd-as-docker-engine-shim-for-kubernetes/)
+```
+$ systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+   Active: active (running) since Fri 2022-04-15 10:34:54 UTC; 14s ago
+     Docs: https://docs.docker.com
+ Main PID: 26072 (dockerd)
+    Tasks: 9
+   Memory: 29.1M
+   CGroup: /system.slice/docker.service
+           └─26072 /usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock
+Install cri-dockerd using ready binary (recommended)
+Install wget and curl command line tools.
 
-Mirantis cri-dockerd CRI socket file path is `/run/cri-dockerd.sock`. This is what will be used when configuring Kubernetes cluster.
+```
+### Debian based systems ###
+```
+sudo apt update
+sudo apt install git wget curl
+
+
+VER=$(curl -s https://api.github.com/repos/Mirantis/cri-dockerd/releases/latest|grep tag_name | cut -d '"' -f 4|sed 's/v//g')
+echo $VER
+
+wget https://github.com/Mirantis/cri-dockerd/releases/download/v${VER}/cri-dockerd-${VER}.amd64.tgz
+tar xvf cri-dockerd-${VER}.amd64.tgz
+
+
+sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
+
+```
+Validate successful installation by running the commands below:
+```
+$ cri-dockerd --version
+cri-dockerd 0.3.4 (e88b1605)
+Configure systemd units for cri-dockerd:
+
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.service
+wget https://raw.githubusercontent.com/Mirantis/cri-dockerd/master/packaging/systemd/cri-docker.socket
+sudo mv cri-docker.socket cri-docker.service /etc/systemd/system/
+sudo sed -i -e 's,/usr/bin/cri-dockerd,/usr/local/bin/cri-dockerd,' /etc/systemd/system/cri-docker.service
+Start and enable the services
+
+sudo systemctl daemon-reload
+sudo systemctl enable cri-docker.service
+sudo systemctl enable --now cri-docker.socket
+Confirm the service is now running:
+
+$ systemctl status cri-docker.socket
+● cri-docker.socket - CRI Docker Socket for the API
+   Loaded: loaded (/etc/systemd/system/cri-docker.socket; enabled; vendor preset: disabled)
+   Active: active (listening) since Fri 2023-03-10 10:02:13 UTC; 4s ago
+   Listen: /run/cri-dockerd.sock (Stream)
+    Tasks: 0 (limit: 23036)
+   Memory: 4.0K
+   CGroup: /system.slice/cri-docker.socket
+
+Mar 10 10:02:13 rocky8.mylab.io systemd[1]: Starting CRI Docker Socket for the API.
+Mar 10 10:02:13 rocky8.mylab.io systemd[1]: Listening on
+```
+
 
 #### Option 2: Install and Use CRI-O:
 
