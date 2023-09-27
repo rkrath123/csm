@@ -145,11 +145,11 @@ EOF
 sudo systemctl daemon-reload 
 sudo systemctl restart docker
 sudo systemctl enable docker
-```
 
-For Docker Engine you need a shim interface. You can install Mirantis cri-dockerd as covered in the below.
 
-```
+# For Docker Engine you need a shim interface. You can install Mirantis cri-dockerd as covered in the below.
+
+
 $ systemctl status docker
 ● docker.service - Docker Application Container Engine
    Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
@@ -163,9 +163,8 @@ $ systemctl status docker
 Install cri-dockerd using ready binary (recommended)
 Install wget and curl command line tools.
 
-```
 
-```
+
 sudo apt update
 sudo apt install git wget curl
 
@@ -179,9 +178,9 @@ tar xvf cri-dockerd-${VER}.amd64.tgz
 
 sudo mv cri-dockerd/cri-dockerd /usr/local/bin/
 
-```
-Validate successful installation by running the commands below:
-```
+
+# Validate successful installation by running the commands below:
+
 $ cri-dockerd --version
 cri-dockerd 0.3.4 (e88b1605)
 Configure systemd units for cri-dockerd:
