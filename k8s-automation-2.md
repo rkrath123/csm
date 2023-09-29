@@ -89,6 +89,13 @@ sudo systemctl enable kubelet
 kubeadm config images pull --cri-socket unix:///run/cri-dockerd.sock
 kubeadm init  --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///run/cri-dockerd.sock
 ```
+#To start using your cluster, you need to run the following as a regular user:
+```
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+```
 #Install network plugin on Master
 ```
  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
