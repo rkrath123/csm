@@ -82,3 +82,10 @@ lsmod | grep br_netfilter
 sudo systemctl enable kubelet
 
 ```
+
+
+#for master node run below
+```
+kubeadm config images pull --cri-socket unix:///run/cri-dockerd.sock
+kubeadm init  --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///run/cri-dockerd.sock
+```
