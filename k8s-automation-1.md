@@ -1,6 +1,8 @@
 # Setup Proxy/dns for craystack vm- ubuntu 20.04 
 Copy the below script and Run it with << bash scriptname >>
 ```
+
+#!/bin/bash
 tee /etc/environment<<EOF
 https_proxy=http://hpeproxy.its.hpecorp.net:443
 http_proxy=http://hpeproxy.its.hpecorp.net:80
