@@ -1,3 +1,5 @@
+# Install Kubernetes Cluster on Ubuntu 20.04 with kubeadm
+
 ```
 
 sudo apt -y install curl apt-transport-https
