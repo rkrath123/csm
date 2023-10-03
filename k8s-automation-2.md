@@ -1,6 +1,6 @@
 # Install Kubernetes Cluster on Ubuntu 20.04 with kubeadm
 
-Copy the below script and Run it with <bash scriptname>
+Copy the below script and Run it with << bash scriptname >>
 ```
 #!/bin/bash
 
