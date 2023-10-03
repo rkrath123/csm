@@ -1,6 +1,8 @@
 # Install Kubernetes Cluster on Ubuntu 20.04 with kubeadm
 
+Copy the below script and Run it with <bash scriptname>
 ```
+#!/bin/bash
 
 sudo apt -y install curl apt-transport-https
 curl  -fsSL  https://packages.cloud.google.com/apt/doc/apt-key.gpg|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kubernetes.gpg
