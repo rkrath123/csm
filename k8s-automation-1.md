@@ -25,6 +25,21 @@ Environment="HTTPS_PROXY=http://hpeproxy.its.hpecorp.net:443"
 Environment="NO_PROXY=localhost,127.0.0.1,us.cray.com,americas.cray.com,dev.cray.com,hpc.amslabs.hpecorp.net,eag.rdlabs.hpecorp.net,github.hpe.com,jira-pro.its.hpecorp.net"
 EOF
 
+mkdir ~/.docker/
+tee ~/.docker/config.json<<EOF
+{
+"proxies":
+{
+   "default":
+   {
+     "httpProxy": "http://hpeproxy.its.hpecorp.net:80/",
+     "httpsProxy": "http://hpeproxy.its.hpecorp.net:443/",
+     "noProxy": "localhost,127.0.0.1,.us.cray.com,.americas.cray.com,.dev.cray.com,.eag.rdlabs.hpecorp.net,github.hpe.com,jira-pro.its.hpecorp.net"
+   }
+}
+}
+EOF
+
 
 systemctl daemon-reload 
 
