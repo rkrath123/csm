@@ -104,3 +104,10 @@ kubeadm init  --pod-network-cidr=192.168.0.0/16 --cri-socket unix:///run/cri-doc
 ```
  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 ```
+
+
+ # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
+```
+source <(kubectl completion bash)
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+```
