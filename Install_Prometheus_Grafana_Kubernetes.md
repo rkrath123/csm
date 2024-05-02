@@ -262,3 +262,7 @@ kubectl --namespace monitoring port-forward svc/alertmanager-main 8001:9093 --ad
 
 ```
 
+# Destroying / Tearing down Prometheus monitoring stack
+```
+kubectl delete --ignore-not-found=true -f manifests/ -f manifests/setup
+```
