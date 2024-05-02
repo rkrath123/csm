@@ -1,4 +1,4 @@
-### Prometheus Operator
+###### Prometheus Operator
 
 We will be using Prometheus Operator in this installation to deploy Prometheus monitoring stack on Kubernetes. The Prometheus Operator is written to ease the deployment and overall management of Prometheus and its related monitoring components. 
 By using the Operator we simplify and automate Prometheus configuration on any any Kubernetes cluster using Kubernetes custom resources.
