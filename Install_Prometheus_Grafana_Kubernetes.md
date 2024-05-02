@@ -238,7 +238,7 @@ Access Prometheus, Grafana, and Alertmanager dashboards
 --------------------------------------------------------
 
 ```
-kubectl --namespace monitoring port-forward svc/grafana 80:3000
+kubectl --namespace monitoring port-forward svc/grafana 80:3000 --address='0.0.0.0' &
 ```
 
 Default Logins are:
@@ -250,7 +250,7 @@ Password: admin
 
 For Prometheus port forwarding run the commands below:
 ```
-kubectl --namespace monitoring port-forward svc/prometheus-k8s 8000:9090
+kubectl --namespace monitoring port-forward svc/prometheus-k8s 8000:9090 --address='0.0.0.0' &
 ```
 ![image](https://github.com/rkrath123/csm/assets/53966749/86ff54fd-f55b-48a2-9d68-70a75fd085d8)
 
@@ -258,7 +258,7 @@ kubectl --namespace monitoring port-forward svc/prometheus-k8s 8000:9090
 Alert Manager Dashboard
 
 ```
-kubectl --namespace monitoring port-forward svc/alertmanager-main 8001:9093
+kubectl --namespace monitoring port-forward svc/alertmanager-main 8001:9093 --address='0.0.0.0' &
 
 ```
 
