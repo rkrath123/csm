@@ -111,7 +111,7 @@ kubectl --namespace monitoring port-forward svc/prometheus-k8s 8000:9090
 Alert Manager Dashboard
 
 ```
-kubectl --namespace monitoring port-forward svc/alertmanager-main 9093
+kubectl --namespace monitoring port-forward svc/alertmanager-main 8001:9093
 
 ```
 
