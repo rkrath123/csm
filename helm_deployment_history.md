@@ -1,4 +1,4 @@
-## Script to find  helm  deployment status history for singsle samespace(i.e. sma) with o/p
+## Script to find  helm chart deployment status history for singsle samespace(i.e. sma) with o/p
 
 ```
 #!/bin/bash
@@ -46,7 +46,7 @@ REVISION        UPDATED                         STATUS          CHART           
 ```
 
 
-## Script to find  helm  deployment status history for ALL samespace in CSM with o/p
+## Script to find  helm chart  deployment status history for ALL samespace in CSM with o/p
 
 ```
 #!/bin/bash
