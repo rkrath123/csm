@@ -170,3 +170,37 @@ fi
 
 
 ```
+
+```
+bash 3.sh
+
+Failed revisions found for release: sma-opensearch in namespace: sma
+REVISION        UPDATED                         STATUS          CHART                   APP VERSION     DESCRIPTION                                                
+1               Tue Apr 30 07:22:38 2024        superseded      sma-opensearch-2.5.9                    Install complete                                           
+2               Fri May 10 10:51:40 2024        uninstalling    sma-opensearch-2.5.10   1.2.13          Deletion in progress (or silently failed)                  
+3               Tue May 14 14:41:22 2024        failed          sma-opensearch-2.5.10   1.2.13          Upgrade "sma-opensearch" failed: post-upgrade hooks failed: timed out waiting for the condition
+4               Tue May 14 17:39:23 2024        deployed        sma-opensearch-2.5.9    1.2.12          Upgrade complete                                           
+-----------------------------------------------
+-----------------------------------------------
+-----------------------------------------------
+-----------------------------------------------
+Failed revisions found for release: sma-pgdb-init in namespace: sma
+REVISION        UPDATED                         STATUS          CHART                   APP VERSION     DESCRIPTION                                                
+1               Tue May 14 14:27:20 2024        superseded      sma-pgdb-init-1.7.2     1.7.2           Install complete                                           
+2               Tue May 14 17:16:06 2024        failed          sma-pgdb-init-1.7.1     1.7.1           Upgrade "sma-pgdb-init" failed: post-upgrade hooks failed: timed out waiting for the condition
+3               Wed May 15 09:22:13 2024        deployed        sma-pgdb-init-1.7.1     1.7.1           Rollback to 2
+
+
+```
+
+ncn-m001:/mnt/developer/rkr # bash 3.sh
+Enter the namespace (or press enter to check all namespaces):
+
+Failed revisions found for release: cray-hms-hbtd in namespace: services
+REVISION        UPDATED                         STATUS          CHART                   APP VERSION     DESCRIPTION                                                
+1               Wed Jan 10 22:37:01 2024        superseded      cray-hms-hbtd-3.0.2     1.19.1          Install complete                                           
+2               Mon Apr  1 14:05:39 2024        failed          cray-hms-hbtd-3.0.4     1.20.0          Upgrade "cray-hms-hbtd" failed: post-upgrade hooks failed: timed out waiting for the condition
+3               Fri Apr  5 08:08:47 2024        superseded      cray-hms-hbtd-3.0.4     1.20.0          Upgrade complete                                           
+4               Fri Apr 26 16:48:18 2024        deployed        cray-hms-hbtd-3.0.4     1.20.0          Upgrade complete              
+
+```
