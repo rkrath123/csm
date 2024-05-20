@@ -172,7 +172,7 @@ fi
 ```
 
 ```
-bash 3.sh
+# bash 3.sh
 
 Failed revisions found for release: sma-opensearch in namespace: sma
 REVISION        UPDATED                         STATUS          CHART                   APP VERSION     DESCRIPTION                                                
@@ -193,7 +193,9 @@ REVISION        UPDATED                         STATUS          CHART           
 
 ```
 
-ncn-m001:/mnt/developer/rkr # bash 3.sh
+```
+
+# bash 3.sh
 Enter the namespace (or press enter to check all namespaces):
 
 Failed revisions found for release: cray-hms-hbtd in namespace: services
