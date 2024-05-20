@@ -157,7 +157,7 @@ check_helm_releases() {
 }
 
 # Read user input for namespace
-read -p "Enter the namespace (or press enter to check all namespaces): " INPUT_NAMESPACE
+read -p "Enter the namespace ((or leave it blank to check all namespaces): " INPUT_NAMESPACE
 
 if [ -z "$INPUT_NAMESPACE" ]; then
   # If no specific namespace is provided, get all namespaces
