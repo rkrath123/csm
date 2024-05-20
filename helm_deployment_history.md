@@ -124,3 +124,49 @@ No Helm releases found in namespace: uas
 -----------------------------------------------
 -----------------------------------------------
 ```
+
+
+# Single shell script to verify user provide input namespace
+
+```
+#!/bin/bash
+
+# Function to get Helm release history and check for failed revisions
+check_helm_releases() {
+  local ns=$1
+  RELEASES=$(helm list -n "$ns" -q)
+
+  if [ -z "$RELEASES" ]; then
+    echo "No Helm releases found in namespace: $ns"
+    return
+  fi
+
+  for release in $RELEASES; do
+    HISTORY=$(helm history -n "$ns" "$release")
+    FAILED=$(echo "$HISTORY" | grep -i "failed")
+
+    if [ -n "$FAILED" ]; then
+      echo "Failed revisions found for release: $release in namespace: $ns"
+      echo "$HISTORY"
+    fi
+
+    echo "-----------------------------------------------"
+  done
+}
+
+# Read user input for namespace
+read -p "Enter the namespace (or press enter to check all namespaces): " INPUT_NAMESPACE
+
+if [ -z "$INPUT_NAMESPACE" ]; then
+  # If no specific namespace is provided, get all namespaces
+  NAMESPACES=$(kubectl get namespaces -o jsonpath='{.items[*].metadata.name}')
+  for ns in $NAMESPACES; do
+    check_helm_releases "$ns"
+  done
+else
+  # Check the provided namespace
+  check_helm_releases "$INPUT_NAMESPACE"
+fi
+
+
+```
